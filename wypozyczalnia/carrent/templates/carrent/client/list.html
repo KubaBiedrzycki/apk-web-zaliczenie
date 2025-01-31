@@ -1,0 +1,13 @@
+{% extends 'carrent/base.html' %}
+
+{% block content %}
+<h1>Lista klientów</h1>
+<ul>
+    {% for client in clients %}
+        <li>
+            <a href="{% url 'client_detail' client.id %}">{{ client.firstname }} {{ client.lastname }}</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Powrót do strony głównej</a>
+{% endblock %}  

@@ -1,0 +1,17 @@
+{% extends 'carrent/base.html' %}
+
+{% block content %}
+<h1>Lista stanów samochodów</h1>
+<ul>
+    {% for condition in conditions %}
+        <li>
+            <a href="{% url 'condition_detail' condition.id %}">
+                Wnętrze czyste: {% if condition.cleanIn %}✔{% else %}✘{% endif %}, 
+                Zewnętrze czyste: {% if condition.cleanOut %}✔{% else %}✘{% endif %}, 
+                Opony: {{ condition.tires }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Powrót do strony głównej</a>
+{% endblock %}

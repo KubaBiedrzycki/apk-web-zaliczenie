@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wypożyczalnia Samochodów</title>
+</head>
+<body>
+    <h1>Witaj w Wypożyczalni Samochodów</h1>
+    <ul>
+        <li><a href="{% url 'car_list' %}">Samochody</a></li>
+        <li><a href="{% url 'client_list' %}">Klienci</a></li>
+        <li><a href="{% url 'rental_list' %}">Wypożyczenia</a></li>
+        <li><a href="{% url 'condition_list' %}">Stan samochodów</a></li>
+    </ul>
+</body>
+</html>

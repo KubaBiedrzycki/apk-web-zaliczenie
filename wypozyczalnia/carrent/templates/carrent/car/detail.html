@@ -1,0 +1,14 @@
+{% extends "carrent\base.html" %}
+
+{% block title %}{{ car.brand }} {{ car.model }}{% endblock %}
+
+{% block content %}
+<h1>{{ car.brand }} {{ car.model }}</h1>
+<p>Kolor: {{ car.color }}</p>
+<p>Moc: {{ car.hp }} HP</p>
+<p>Napęd: {{ car.drive }}</p>
+<p>Stan: <a href="{% url 'condition_detail' car.condition.id %}">{{ car.condition }}</a></p>
+<a href="{% url 'car_list' %}">Powrót do listy samochodów</a>
+<a href="{% url 'home' %}">Strona główna</a>
+{% endblock %}
+

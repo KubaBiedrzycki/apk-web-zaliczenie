@@ -1,0 +1,15 @@
+{% extends 'carrent/base.html' %}
+
+{% block content %}
+<h1>Lista wypożyczeń</h1>
+<ul>
+    {% for rental in rentals %}
+        <li>
+            <a href="{% url 'rental_detail' rental.id %}">
+                Samochód: {{ rental.car }} | Klient: {{ rental.client }} | Do: {{ rental.untill }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Powrót do strony głównej</a>
+{% endblock %}

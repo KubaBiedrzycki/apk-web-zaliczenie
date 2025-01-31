@@ -1,0 +1,13 @@
+{% extends "carrent\base.html" %}
+
+{% block title %}{{ client.firstname }} {{ client.lastname }}{% endblock %}
+
+{% block content %}
+<h1>{{ client.firstname }} {{ client.lastname }}</h1>
+<p>Wiek: {{ client.age }}</p>
+<p>Prawo jazdy: {% if client.drivingLicense %}Tak{% else %}Nie{% endif %}</p>
+<p>Ważne do: {{ client.drivingLicenseUntill }}</p>
+<a href="{% url 'client_list' %}">Powrót do listy klientów</a>
+<a href="{% url 'home' %}">Strona główna</a>
+
+{% empty %}
