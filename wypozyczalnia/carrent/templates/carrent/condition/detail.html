@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Stan pojazdu</h1>
 <p>Wnętrze czyste: {% if condition.cleanIn %}Tak{% else %}Nie{% endif %}</p>
-<p>Zewnętrze czyste: {% if condition.cleanOut %}Tak{% else %}Nie{% endif %}</p>
+<p>Zewnątrz czyste: {% if condition.cleanOut %}Tak{% else %}Nie{% endif %}</p>
 <p>Stan opon: {{ condition.tires }}</p>
 <a href="{% url 'condition_list' %}">Powrót do listy stanów</a>
 <a href="{% url 'home' %}">Strona główna</a>

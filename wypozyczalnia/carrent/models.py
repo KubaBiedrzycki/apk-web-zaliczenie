@@ -6,8 +6,14 @@ class Condition(models.Model):
     cleanOut = models.BooleanField(default=True)
     tires = models.CharField(max_length=50)
 
+    def clean_in_text(self):
+        return "Czyste wew." if self.cleanIn else "Brudne wew."
+
+    def clean_out_text(self):
+        return "Czyste zew." if self.cleanOut else "Brudne zew."
+    
     def __str__(self):
-        return f"{self.cleanIn} {self.cleanOut} {self.tires}"
+        return f"{self.clean_in_text()} {self.clean_out_text()} {self.tires}"
 
 class Client(models.Model):
     firstname = models.CharField(max_length=50)

@@ -1,13 +1,48 @@
 {% extends 'carrent/base.html' %}
 
+{% block title %}Lista klientów{% endblock %}
+
 {% block content %}
-<h1>Lista klientów</h1>
-<ul>
-    {% for client in clients %}
-        <li>
-            <a href="{% url 'client_detail' client.id %}">{{ client.firstname }} {{ client.lastname }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <h1 class="text-center">Lista Klientów</h1>
+
+    <!-- Formularz wyszukiwania -->
+    <form method="GET" class="d-flex mb-4">
+        <input type="text" name="q" class="form-control me-2" placeholder="Szukaj po imieniu lub nazwisku..."
+               value="{{ query|default_if_none:'' }}">
+        <button type="submit" class="btn btn-primary">Szukaj</button>
+    </form>
+
+    <!-- Formularz dodawania nowego klienta -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Dodaj nowego klienta</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" name="add_client" class="btn btn-success">Dodaj klienta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista klientów -->
+    <div class="row">
+        {% for client in clients %}
+            <div class="col-md-4">
+                <div class="card shadow-lg mb-4">
+                    <div class="card-body">
+                        <a href="{% url 'client_detail' client.id %}"> 
+                        <h5 class="card-title">{{ client.firstname }} {{ client.lastname }}</h5> </a>
+                        <p class="card-text">Wiek: {{ client.age }} lat</p>
+                        <p class="card-text">Prawo jazdy: {{ client.drivingLicense }}</p>
+                        <p class="card-text">Ważność prawa jazdy: {{ client.drivingLicenseUntill }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">Brak wyników wyszukiwania.</p>
+        {% endfor %}
+    </div>
+</div>
 <a href="{% url 'home' %}">Powrót do strony głównej</a>
-{% endblock %}  
+{% endblock %}

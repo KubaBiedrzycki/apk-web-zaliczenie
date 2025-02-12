@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import datetime
 from .models import Car, Client, Rental, Condition
+from .forms import CarForm, ClientForm
+
 
 # Create your views here.
 
@@ -18,19 +20,40 @@ def home(request):
     return render(request, 'carrent/home.html')
 
 def car_list(request):
+    query = request.GET.get('q')
     cars = Car.objects.all()
-    return render(request, 'carrent/car/list.html', {'cars': cars})
+
+    if query:
+        cars = cars.filter(brand__icontains=query) | cars.filter(model__icontains=query)
+
+    # Obsługa formularza dodawania nowego samochodu
+    if request.method == "POST":
+        form = CarForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('car_list')  # Odśwież stronę po dodaniu samochodu
+    else:
+        form = CarForm()
+
+    return render(request, 'carrent/car/list.html', {'cars': cars, 'query': query, 'form': form})
 
 def client_list(request):
-    if request.method == 'POST':
-        cars = Client.objects.filter(firstname__icontains=request.POST['phrase'])
-    else:
-        # pobieramy wszystkie obiekty Person z bazy poprzez QuerySet
-        clients = Client.objects.all()
+    query = request.GET.get('q')
+    clients = Client.objects.all()
 
-    return render(request,
-                  "carrent/client/list.html",
-                  {'clients': clients})
+    if query:
+        clients = clients.filter(firstname__icontains=query) | clients.filter(lastname__icontains=query)
+
+    # Obsługa formularza dodawania nowego samochodu
+    if request.method == "POST":
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('client_list')  # Odśwież stronę po dodaniu samochodu
+    else:
+        form = ClientForm()
+
+    return render(request, 'carrent/client/list.html', {'clients': clients, 'query': query, 'form': form})
 
 def rental_list(request):
     if request.method == 'POST':

@@ -7,7 +7,7 @@
         <li>
             <a href="{% url 'condition_detail' condition.id %}">
                 Wnętrze czyste: {% if condition.cleanIn %}✔{% else %}✘{% endif %}, 
-                Zewnętrze czyste: {% if condition.cleanOut %}✔{% else %}✘{% endif %}, 
+                Zewnątrz czyste: {% if condition.cleanOut %}✔{% else %}✘{% endif %}, 
                 Opony: {{ condition.tires }}
             </a>
         </li>

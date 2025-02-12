@@ -1,13 +1,48 @@
 {% extends 'carrent/base.html' %}
 
+{% block title %}Lista samochodów{% endblock %}
+
 {% block content %}
-<h1>Lista samochodów</h1>
-<ul>
-    {% for car in cars %}
-        <li>
-            <a href="{% url 'car_detail' car.id %}">{{ car.brand }} {{ car.model }} ({{ car.color }})</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <h1 class="text-center">Lista Samochodów</h1>
+
+    <!-- Formularz wyszukiwania -->
+    <form method="GET" class="d-flex mb-4">
+        <input type="text" name="q" class="form-control me-2" placeholder="Szukaj po marce lub modelu..."
+               value="{{ query|default_if_none:'' }}">
+        <button type="submit" class="btn btn-primary">Szukaj</button>
+    </form>
+
+    <!-- Formularz dodawania nowego samochodu -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Dodaj nowy samochód</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Dodaj samochód</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista samochodów -->
+    <div class="row">
+        {% for car in cars %}
+            <div class="col-md-4">
+                <div class="card shadow-lg mb-4">
+                    <div class="card-body">
+                        <a href="{% url 'car_detail' car.id %}">
+                        <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5> </a>
+                        <p class="card-text">Kolor: {{ car.color }}</p>
+                        <p class="card-text">Moc: {{ car.hp }} KM</p>
+                        <p class="card-text">Napęd: {{ car.drive }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">Brak wyników wyszukiwania.</p>
+        {% endfor %}
+    </div>
+</div>
 <a href="{% url 'home' %}">Powrót do strony głównej</a>
 {% endblock %}

@@ -3,15 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wypożyczalnia Samochodów</title>
+    <title>Strona Główna - Wypożyczalnia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Witaj w Wypożyczalni Samochodów</h1>
-    <ul>
-        <li><a href="{% url 'car_list' %}">Samochody</a></li>
-        <li><a href="{% url 'client_list' %}">Klienci</a></li>
-        <li><a href="{% url 'rental_list' %}">Wypożyczenia</a></li>
-        <li><a href="{% url 'condition_list' %}">Stan samochodów</a></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Wypożyczalnia</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'client_list' %}">Klienci</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'car_list' %}">Samochody</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'rental_list' %}">Wypożyczenia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'condition_list' %}">Stany pojazdów</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 text-center">
+        <h1>Witaj w CarRent</h1>
+        <p class="lead">Wybierz jedną z dostępnych sekcji:</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Klienci</h5>
+                        <p class="card-text">Zarządzaj listą klientów.</p>
+                        <a href="{% url 'client_list' %}" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Samochody</h5>
+                        <p class="card-text">Przeglądaj dostępne pojazdy.</p>
+                        <a href="{% url 'car_list' %}" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Wypożyczenia</h5>
+                        <p class="card-text">Sprawdź historię wynajmów.</p>
+                        <a href="{% url 'rental_list' %}" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kondycja pojazdów</h5>
+                        <p class="card-text">Zobacz stan techniczny aut.</p>
+                        <a href="{% url 'condition_list' %}" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 py-3 bg-light">
+        <p>&copy; 2025 CarRent</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
